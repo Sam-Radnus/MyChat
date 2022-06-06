@@ -44,7 +44,7 @@ h1,p{
     background-color: rgba(198,202,219,1);
 }
 
-.video-player{
+div.video-player{
     height:100%;
     width:100%;
 }
