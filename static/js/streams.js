@@ -12,12 +12,14 @@ let joinAndDisplayLocalStream = async () => {
     let player =`
     <div class="video-container" id="user-container-${UID}">
     <div class="username-wrapper"><span class="user-name">My Name</span></div>
-    <div class="video-player" id="user-${UID}"></div>
+    <div class="video-player" id="user-${UID}">
+    </div>
     </div> 
                 `
     
     
-   document.getElementById('video-streams').insertAdjacentElement('beforeend',player)   
+   document.getElementById('video-streams').insertAdjacentHTML('beforeend',player)   
+   console.log(document.getElementById('video-streams'))
    localTracks[1].play(`user-${UID}`)//creates a video where our video will be displayed       
 
    await client.publish([localTracks[0],localTracks[1]]) //helps others see the video 
