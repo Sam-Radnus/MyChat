@@ -10,7 +10,21 @@
             <p>
                 A Group Video Calling Application made Just for You
             </p>
+            <form id="form">
+                <div class="form-field">
+                    <input type="submit" value="join stream"/>
+                </div>
+
+            </form>
             </div>
     </section>
 </main>
+<script type="text/javascript">
+    let form =document.getElementById('form')
+    let handleSubmit=async(e)=>{
+        e.preventDefault();
+        window.open('/room','_self')
+    }
+    form.addEventListener('submit',handleSubmit);
+</script>
 {% endblock content %}
