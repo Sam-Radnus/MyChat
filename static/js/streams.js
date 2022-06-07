@@ -1,6 +1,6 @@
 const APP_ID = '121ed57cbab846018e6a35749de3c958'
-const CHANNEL = 'renewToken'
-const TOKEN = '006121ed57cbab846018e6a35749de3c958IACjgCN9jmIwZXP0pN7DzwAjtQfv20ic8iGnEArOl2UNIGTNKL8AAAAAEACXVkQugiKeYgEAAQCDIp5i'
+const CHANNEL = 'main'
+const TOKEN = '0061c2e95229d05495ead990269f8fa0414IAD+HSyQJSXB70brmQnda1iISoh/d3CAOTebthZZ7AlBMmTNKL8AAAAAEAA9DfJzMdegYgEAAQA216Bi'
 const client = AgoraRTC.createClient({ mode: 'rtc', codec: 'vp8' })
 let UID;
 let localTracks = [] //audio and video tracks
