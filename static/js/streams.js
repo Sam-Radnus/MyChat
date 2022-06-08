@@ -8,6 +8,7 @@ let remoteUsers = {}
 console.log(TOKEN);
 let joinAndDisplayLocalStream = async () => {
     client.on('user-published', handleUserJoined)
+    client.on('user-left',handleUserLeft)
     UID = await client.join(APP_ID, CHANNEL, TOKEN, null) //helps to join a channel 
     localTracks = await AgoraRTC.createMicrophoneAndCameraTracks()//take audio and video tracks from user
 
@@ -47,6 +48,42 @@ let handleUserJoined = async (user, mediaType) => {
         user.audioTrack.play()
     }
 }
+let handleUserLeft=async(user)=>{
+    delete remoteUsers[user.uid];
+    document.getElementById(`user-container-${user.uid}`).remove();
+}
+let leaveAndRemoveLocalStream=async()=>{
+    //we are going to the localTracks and stop the video and audio for the user the clicked the video and unsubscribe
+    for(let i=0 ;i<localTracks.length;i++)
+    {
+        localTracks[i].stop()//pauses it can be reopened 
+        localTracks[i].close()
+    }
+    await client.leave();
+    window.open('/','_self')
+}
 
-
+let toggleCamera=async(e)=>{
+    if(localTracks[1].muted){
+        await localTracks[1].setMuted(false);
+        e.target.style.backgroundColor='#fff';
+    }
+    else{
+        await localTracks[1].setMuted(true);
+        e.target.style.backgroundColor='#FF5050';
+    }
+}
+let toggleAudio=async(e)=>{
+    if(localTracks[0].muted){
+        await localTracks[0].setMuted(false);
+        e.target.style.backgroundColor='#fff';
+    }
+    else{
+        await localTracks[0].setMuted(true);
+        e.target.style.backgroundColor='#FF5050';
+    }
+}
 joinAndDisplayLocalStream()
+document.getElementById('leave-btn').addEventListener('click',leaveAndRemoveLocalStream);
+document.getElementById('camera-btn').addEventListener('click',toggleCamera);
+document.getElementById('mic-btn').addEventListener('click',toggleAudio);
